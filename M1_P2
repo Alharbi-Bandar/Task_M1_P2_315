@@ -1,0 +1,41 @@
+
+
+int led_Pin_light = 8;
+
+int motion_PIR_Pin = 2;
+
+int State_LED = LOW;
+
+void setup() 
+{
+  Serial.begin(9600);
+  
+  pinMode(led_Pin_light, OUTPUT);
+  
+  pinMode(motion_PIR_Pin, INPUT);
+
+  //syntax 
+  //attachInterrupt(digitalPinToInterrupt(pin), ISR, mode);
+  
+  attachInterrupt(digitalPinToInterrupt(motion_PIR_Pin), PIR_ISR, CHANGE);
+}
+
+void loop() 
+{
+  delay(100); 
+}
+
+void PIR_ISR()
+{
+  if (State_LED = !State_LED) {
+  digitalWrite(led_Pin_light, State_LED);
+  Serial.println("Motion is detected");
+  }
+  else 
+  {
+  	Serial.println("No Motion is detected");
+    digitalWrite(led_Pin_light, LOW);
+
+  }
+}
+
